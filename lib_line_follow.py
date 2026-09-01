@@ -12,9 +12,9 @@ instead of tracking it, set `edge` to the other side (or negate
 config.LINE_FOLLOW_KP).
 """
 
-from robot import robot
-import config
-from pid_controller import PID
+from lib_robot import robot
+import lib_config as config
+from lib_pid_controller import PID
 
 
 def follow_line_for_distance(distance_mm, speed=None, edge="right", sensor=None,

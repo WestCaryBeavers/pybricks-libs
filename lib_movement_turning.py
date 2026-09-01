@@ -13,8 +13,8 @@ robot's right; negative means the center is to the robot's left.
 
 from pybricks.parameters import Stop
 
-from robot import robot
-import config
+from lib_robot import robot
+import lib_config as config
 
 
 def turn_in_place(angle_deg, then=Stop.HOLD, wait=True):

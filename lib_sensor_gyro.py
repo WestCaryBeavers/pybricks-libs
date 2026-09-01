@@ -10,7 +10,7 @@ log/debug heading drift.
 
 from pybricks.tools import wait, StopWatch
 
-from robot import robot
+from lib_robot import robot
 
 
 def heading():

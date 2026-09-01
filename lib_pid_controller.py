@@ -7,7 +7,7 @@ in DriveBase or any specific hardware.
 
 from pybricks.tools import StopWatch
 
-from math_utils import clamp
+from lib_math_utils import clamp
 
 
 class PID:

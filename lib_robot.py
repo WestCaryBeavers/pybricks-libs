@@ -11,7 +11,7 @@ from pybricks.pupdevices import Motor, ColorSensor, UltrasonicSensor, ForceSenso
 from pybricks.parameters import Axis
 from pybricks.robotics import DriveBase
 
-import config
+import lib_config as config
 
 
 class Robot:
@@ -51,7 +51,7 @@ class Robot:
 
         self.left_color_sensor = self._make_color_sensor(config.LEFT_COLOR_SENSOR_PORT)
         self.right_color_sensor = self._make_color_sensor(config.RIGHT_COLOR_SENSOR_PORT)
-        self.distance_sensor = self._make_ultrasonic_sensor(config.DISTANCE_SENSOR_PORT)
+        # self.distance_sensor = self._make_ultrasonic_sensor(config.DISTANCE_SENSOR_PORT)
         self.touch_sensor = self._make_touch_sensor(config.TOUCH_SENSOR_PORT)
 
     @staticmethod
@@ -62,9 +62,9 @@ class Robot:
     def _make_color_sensor(port):
         return ColorSensor(port) if port is not None else None
 
-    @staticmethod
-    def _make_ultrasonic_sensor(port):
-        return UltrasonicSensor(port) if port is not None else None
+    # @staticmethod
+    # def _make_ultrasonic_sensor(port):
+    #     return UltrasonicSensor(port) if port is not None else None
 
     @staticmethod
     def _make_touch_sensor(port):
