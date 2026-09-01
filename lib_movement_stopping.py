@@ -8,7 +8,7 @@ Stop.HOLD: motors actively hold their current position/heading.
 
 from pybricks.parameters import Stop
 
-from robot import robot
+from lib_robot import robot
 
 
 def stop_coast():

@@ -12,9 +12,9 @@ from pybricks.parameters import Port, Direction
 # Motor ports
 # ---------------------------------------------------------------------------
 LEFT_DRIVE_MOTOR_PORT = Port.A
-RIGHT_DRIVE_MOTOR_PORT = Port.B
-FRONT_ATTACHMENT_MOTOR_PORT = Port.C
-BACK_ATTACHMENT_MOTOR_PORT = Port.D
+RIGHT_DRIVE_MOTOR_PORT = Port.E
+FRONT_ATTACHMENT_MOTOR_PORT = Port.D
+BACK_ATTACHMENT_MOTOR_PORT = Port.C
 
 # ---------------------------------------------------------------------------
 # Motor directions
@@ -30,14 +30,14 @@ BACK_ATTACHMENT_MOTOR_DIRECTION = Direction.CLOCKWISE
 # accepted by pybricks.pupdevices.Motor(gears=...), e.g. [12, 36] for a
 # 12-tooth driver into a 36-tooth driven gear. Leave as None for a direct
 # (1:1) connection.
-FRONT_ATTACHMENT_GEARS = None
+FRONT_ATTACHMENT_GEARS = [[32, 40], [12, 24]]
 BACK_ATTACHMENT_GEARS = None
 
 # ---------------------------------------------------------------------------
 # Sensor ports
 # ---------------------------------------------------------------------------
 # Set any of these to None if that sensor is not present on your robot.
-LEFT_COLOR_SENSOR_PORT = Port.E
+LEFT_COLOR_SENSOR_PORT = Port.B
 RIGHT_COLOR_SENSOR_PORT = None
 DISTANCE_SENSOR_PORT = Port.F
 TOUCH_SENSOR_PORT = None
@@ -48,8 +48,8 @@ TOUCH_SENSOR_PORT = None
 # Measure these directly on the robot. Getting these right matters more than
 # any other constant in this file: every gyro-assisted straight/turn/arc
 # still relies on wheel_diameter and axle_track for distance and radius math.
-WHEEL_DIAMETER_MM = 56
-AXLE_TRACK_MM = 114
+WHEEL_DIAMETER_MM = 87
+AXLE_TRACK_MM = 144
 
 # ---------------------------------------------------------------------------
 # Default motion tuning (used by DriveBase.settings())

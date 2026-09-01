@@ -9,8 +9,8 @@ code at the call site.
 
 from pybricks.parameters import Stop
 
-from robot import robot
-import config
+from lib_robot import robot
+import lib_config as config
 
 
 def drive_straight(distance_mm, speed=None, then=Stop.HOLD, wait=True):

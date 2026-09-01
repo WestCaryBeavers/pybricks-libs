@@ -2,8 +2,8 @@
 
 from pybricks.tools import wait, StopWatch
 
-from robot import robot
-import config
+from lib_robot import robot
+import lib_config as config
 
 
 def _sensor_or_raise():
