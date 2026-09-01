@@ -41,22 +41,6 @@ def mission_two():
     drive_straight(-300)
     stop_all(then=Stop.HOLD)
 
-def mission_three():
-    """Example: drive out, run an attachment, turn, come back."""
-    reset_heading(0)
-    run_by_degrees(robot.front_attachment, 90, speed=400)
-    drive_straight(730)
-    drive_straight(-30, speed=50)
-    run_by_degrees(robot.front_attachment, -90, speed=400)
-    # run_by_degrees(robot.front_attachment, 90, speed=400)
-    # turn_in_place(90)
-    # drive_straight(200)
-    # run_by_degrees(robot.front_attachment, -90, speed=400)
-    # turn_in_place(-90)
-    # drive_straight(-700)
-    # home(robot.front_attachment, speed=-200, duty_limit=30)
-    stop_all(then=Stop.HOLD)
-
 # Add every runnable mission here; the selector below cycles through this
 # list in order.
 MISSIONS = [
@@ -106,4 +90,4 @@ def run_mission_selector():
 
 if __name__ == "__main__":
     # run_mission_selector()
-    mission_three()
+    mission_one()

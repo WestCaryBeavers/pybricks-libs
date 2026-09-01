@@ -19,7 +19,7 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 
 def mission():
-    """Example: drive out, run an attachment, turn, come back."""
+    """for mission #7, #11."""
     reset_heading(0)
     run_by_degrees(robot.front_attachment, 90, speed=400)
     drive_straight(730)
