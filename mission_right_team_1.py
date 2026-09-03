@@ -5,6 +5,7 @@ example missions with your own, and rename this file (or its contents) to
 whatever your Pybricks project uses as its main file.
 """
 
+
 import dev_stub  # noqa: F401  (desktop-only pybricks stub; no-op on the hub)
 
 from pybricks.parameters import Stop, Color, Button
@@ -19,12 +20,14 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 
 def mission():
-    """for mission #7, #11."""
+    """for station #7, #11."""  
     reset_heading(0)
-    run_by_degrees(robot.front_attachment, 90, speed=400)
-    drive_straight(730)
-    drive_straight(-30, speed=50)
-    run_by_degrees(robot.front_attachment, -90, speed=400)
+    drive_straight(690, speed = 360)
+    turn_in_place(90)
+    drive_straight(396, speed=185)
+    turn_in_place(45)
+    drive_straight(270, speed=75)
+    run_by_degrees(robot.front_attachment, 150, speed=450)
     # run_by_degrees(robot.front_attachment, 90, speed=400)
     # turn_in_place(90)
     # drive_straight(200)
