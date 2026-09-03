@@ -37,9 +37,9 @@ BACK_ATTACHMENT_GEARS = None
 # Sensor ports
 # ---------------------------------------------------------------------------
 # Set any of these to None if that sensor is not present on your robot.
-LEFT_COLOR_SENSOR_PORT = Port.B
+LEFT_COLOR_SENSOR_PORT = None
 RIGHT_COLOR_SENSOR_PORT = None
-DISTANCE_SENSOR_PORT = Port.F
+DISTANCE_SENSOR_PORT = None
 TOUCH_SENSOR_PORT = None
 
 # ---------------------------------------------------------------------------
