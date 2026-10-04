@@ -20,47 +20,57 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 # negative means left, positive means right
 
-def mission():
+def mission_1():
     """for station #7, #11."""  
-    reset_heading(0)
+    #seed_part
+    reset_heading(0) 
     drive_straight(470, speed = 400)
     turn_in_place(45)
     drive_straight(130, speed=200)
     turn_in_place(-45)
+    #to_ant
     drive_straight(150, 100)
     turn_in_place(90)
-    drive_straight(270, speed=300)
+    drive_straight(280, speed=300)
     turn_in_place(45)
     drive_straight(300, speed=75)
+    #flip_fungus
     run_by_degrees(robot.front_attachment, 150, speed=700)
+    #to_roots
     drive_straight(-50, speed=200)
     turn_in_place(90)
     drive_straight(400, speed=400)
     turn_in_place(45)
+    #to_tree_support
     drive_straight(-260, speed=400)
     turn_in_place(90)
     run_by_degrees(robot.back_attachment, 130, speed=600)
     drive_straight(-140, speed=200)
     run_by_degrees(robot.back_attachment, -200, speed=700)
+    #to_greenhouse
     drive_straight(40, speed=300)
     turn_in_place(-30)
+    #open_compost
     run_by_degrees(robot.back_attachment, 200, speed=600)
-    drive_straight(40, speed=100)
+    drive_straight(45, speed=100)
     turn_in_place(-10)
-    run_by_degrees(robot.back_attachment, -55, speed=50)
-    run_by_degrees(robot.front_attachment, 30, speed=100)
+    #uncover_nest
+    run_by_degrees(robot.back_attachment, -90, speed=50)
+    run_by_degrees(robot.front_attachment, 45, speed=100)
     drive_straight(30, speed=200)
+    #end_mission
     turn_in_place(-45)
     drive_straight(750, speed=200)
 
-    # run_by_degrees(robot.front_attachment, 90, speed=400)
-    # turn_in_place(90)
-    # drive_straight(200)
-    # run_by_degrees(robot.front_attachment, -90, speed=400)
-    # turn_in_place(-90)
-    # drive_straight(-700)
-    # home(robot.front_attachment, speed=-200, duty_limit=30)
+def mission_2():
+    run_by_degrees(robot.front_attachment, -35, speed=700)
+    drive_straight(220, speed=700)
+    run_by_degrees(robot.front_attachment, 20, speed=700)
+    drive_straight(100, speed=300)
+    run_by_degrees(robot.front_attachment, -60, speed=700)
+
+
     stop_all(then=Stop.HOLD)
 
 if __name__ == "__main__":
-    mission()
+    mission_2()
