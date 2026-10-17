@@ -71,20 +71,35 @@ def mission_3():
     #run_by_degrees(front(), 80, speed=200)
     #drive_straight(-280, speed=300)
 def mission_4():
-    front().run_target(300, 50,)
+    home(front())
+    run_by_degrees(front(), 200, speed=300)
     drive_straight(150, speed=300)
     turn_in_place(-90)
     drive_straight(700, speed=275)
     turn_in_place(-47)
     drive_straight(20, speed=300)
-    run_by_degrees(front(),300, 45,)
-    run_by_degrees(front(),30, 10,)
+    run_by_degrees(front(),-180, 45,)
     wait(1000)
-    front().run_target(300, 50,)
+    front().run_target(300, 0,)
+    drive_straight(-20, speed=300)
+    turn_in_place(47)
+    drive_straight(-700, speed=275)
+    turn_in_place(90)
+    drive_straight(-150, speed=300)
+
+def mission_5():
+    run_by_degrees(front(), 100, speed=300)
+    drive_straight(180, speed=300)
+    turn_in_place(-90)
+    drive_straight(710, speed=275)
+    run_by_degrees(front(),-35, 45,)
+    turn_in_place(20)
+    drive_straight(-70, speed=300)
+    run_by_degrees(front(),-50, 50)
+    drive_straight(175, speed=50)
 
 def testing():
-    1
+    run_by_degrees(front(), -200, speed=300)
 if __name__ == "__main__":
 # run_mission_selector()
-    mission_4() 
-    front().run_target(300, 0,)    
+    drive_straight(100, speed=300, wait=False)
