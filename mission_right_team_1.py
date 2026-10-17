@@ -56,21 +56,21 @@ def mission_1():
     turn_in_place(-10)
     #uncover_nest
     run_by_degrees(robot.back_attachment, -90, speed=50)
-    run_by_degrees(robot.front_attachment, 45, speed=100)
     drive_straight(30, speed=200)
     #end_mission
     turn_in_place(-45)
     drive_straight(750, speed=200)
 
 def mission_2():
-    run_by_degrees(robot.front_attachment, -35, speed=700)
-    drive_straight(220, speed=700)
-    run_by_degrees(robot.front_attachment, 20, speed=700)
-    drive_straight(100, speed=300)
-    run_by_degrees(robot.front_attachment, -60, speed=700)
-
-
+    run_by_degrees(robot.front_attachment, 17, speed=100)
+    drive_straight(331, speed=300)
+    run_by_degrees(robot.front_attachment, 15, speed=100)
+    drive_straight(-170, speed=75)
+    turn_in_place(10, wait=False)
+    run_by_degrees(robot.front_attachment, -20, speed=25)
+    drive_straight(-150, speed=200)
+    
     stop_all(then=Stop.HOLD)
 
 if __name__ == "__main__":
-    mission_2()
+    mission_1()
