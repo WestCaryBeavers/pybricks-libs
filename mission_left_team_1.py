@@ -71,11 +71,6 @@ def mission_3():
     #run_by_degrees(front(), 80, speed=200)
     #drive_straight(-280, speed=300)
 
-def testing():
-    run_by_degrees(front(), -200, speed=300)
-if __name__ == "__main__":
-# run_mission_selector()
-    drive_straight(100, speed=300, wait=False)
 
 def mission_4_checkseed():
     home(robot.front_attachment)
