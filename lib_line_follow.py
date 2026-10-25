@@ -12,13 +12,16 @@ instead of tracking it, set `edge` to the other side (or negate
 config.LINE_FOLLOW_KP).
 """
 
+from pybricks.parameters import Stop
+
 from lib_robot import robot
 import lib_config as config
 from lib_pid_controller import PID
+from lib_movement_stopping import stop_drive_base
 
 
 def follow_line_for_distance(distance_mm, speed=None, edge="right", sensor=None,
-                              target_reflection=None):
+                              target_reflection=None, then=Stop.HOLD):
     """Follow a line for a straight-line distance of `distance_mm` mm.
 
     edge="right" assumes the line is to the robot's right (sensor mounted
@@ -27,23 +30,26 @@ def follow_line_for_distance(distance_mm, speed=None, edge="right", sensor=None,
     edge="left" if your sensor is mounted on the other side and the robot
     steers the wrong way.
     """
+    start = robot.drive_base.distance()
     _follow_line(
-        stop_condition=lambda: abs(robot.drive_base.distance()) >= abs(distance_mm),
+        stop_condition=lambda: abs(robot.drive_base.distance() - start) >= abs(distance_mm),
         speed=speed, edge=edge, sensor=sensor, target_reflection=target_reflection,
+        then=then,
     )
 
 
 def follow_line_until(condition_fn, speed=None, edge="right", sensor=None,
-                       target_reflection=None):
+                       target_reflection=None, then=Stop.HOLD):
     """Follow a line until `condition_fn()` returns True (e.g. another
     sensor detects an intersection or an object)."""
     _follow_line(
         stop_condition=condition_fn,
         speed=speed, edge=edge, sensor=sensor, target_reflection=target_reflection,
+        then=then,
     )
 
 
-def _follow_line(stop_condition, speed, edge, sensor, target_reflection):
+def _follow_line(stop_condition, speed, edge, sensor, target_reflection, then):
     drive_base = robot.drive_base
     chosen_sensor = sensor if sensor is not None else robot.left_color_sensor
     if chosen_sensor is None:
@@ -61,11 +67,11 @@ def _follow_line(stop_condition, speed, edge, sensor, target_reflection):
         integral_limit=50, output_limits=(-150, 150),
     )
     pid.reset()
-    drive_base.reset()
+    # No drive_base.reset() here: with the gyro on it also resets the heading.
 
     while not stop_condition():
         error = chosen_sensor.reflection() - target
         turn_rate = direction * pid.update(error)
         drive_base.drive(drive_speed, turn_rate)
 
-    drive_base.stop()
+    stop_drive_base(then)

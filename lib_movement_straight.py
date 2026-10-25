@@ -8,8 +8,10 @@ code at the call site.
 """
 
 from pybricks.parameters import Stop
+from pybricks.tools import wait, StopWatch
 
 from lib_robot import robot
+from lib_movement_stopping import stop_drive_base
 import lib_config as config
 
 
@@ -33,24 +35,26 @@ def drive_straight(distance_mm, speed=None, then=Stop.HOLD, wait=True):
         drive_base.settings(straight_speed=previous_speed)
 
 
-def drive_until_stalled(speed=200, then=Stop.HOLD):
+def drive_until_stalled(speed=200, then=Stop.HOLD, timeout_ms=None):
     """Drive forward (or backward, if `speed` is negative) until both drive
     motors stall, e.g. the robot has driven into a wall or a fixed part of
     the field. Returns the distance traveled in millimeters.
+
+    timeout_ms is an optional safety cap so a mission can't get stuck here
+    forever if one wheel keeps slipping instead of stalling.
     """
     drive_base = robot.drive_base
-    drive_base.reset()
+    # Don't call drive_base.reset(): with the gyro on, that also resets the
+    # heading to 0 and breaks later turn_to_heading() calls.
+    start = drive_base.distance()
+    watch = StopWatch()
     drive_base.drive(speed, 0)
     while not (robot.left_motor.stalled() and robot.right_motor.stalled()):
-        pass
-    drive_base.stop()
-    if then == Stop.HOLD:
-        robot.left_motor.hold()
-        robot.right_motor.hold()
-    elif then == Stop.BRAKE:
-        robot.left_motor.brake()
-        robot.right_motor.brake()
-    return drive_base.distance()
+        if timeout_ms is not None and watch.time() >= timeout_ms:
+            break
+        wait(5)
+    stop_drive_base(then)
+    return drive_base.distance() - start
 
 
 def drive_until(condition_fn, speed=None, max_distance_mm=None, then=Stop.HOLD):
@@ -64,18 +68,14 @@ def drive_until(condition_fn, speed=None, max_distance_mm=None, then=Stop.HOLD):
     """
     drive_base = robot.drive_base
     drive_speed = speed if speed is not None else config.DEFAULT_STRAIGHT_SPEED
-    drive_base.reset()
+    # Measure from the current distance instead of drive_base.reset(), which
+    # would also reset the gyro heading to 0.
+    start = drive_base.distance()
     drive_base.drive(drive_speed, 0)
 
     while not condition_fn():
-        if max_distance_mm is not None and abs(drive_base.distance()) >= abs(max_distance_mm):
+        if max_distance_mm is not None and abs(drive_base.distance() - start) >= abs(max_distance_mm):
             break
 
-    drive_base.stop()
-    if then == Stop.HOLD:
-        robot.left_motor.hold()
-        robot.right_motor.hold()
-    elif then == Stop.BRAKE:
-        robot.left_motor.brake()
-        robot.right_motor.brake()
-    return drive_base.distance()
+    stop_drive_base(then)
+    return drive_base.distance() - start

@@ -43,6 +43,20 @@ def is_stationary():
     return robot.hub.imu.stationary()
 
 
+def wait_until_gyro_ready(timeout_ms=None):
+    """Block until the gyro has calibrated itself, which needs the robot to
+    sit perfectly still for a few seconds after the hub starts (or after it
+    has been moving for more than 10 minutes). Starting a run before this
+    makes the heading drift. Returns True if ready, False on timeout.
+    """
+    watch = StopWatch()
+    while not robot.hub.imu.ready():
+        if timeout_ms is not None and watch.time() >= timeout_ms:
+            return False
+        wait(10)
+    return True
+
+
 def wait_until_stationary(timeout_ms=None):
     """Block until the robot is stationary, e.g. right after placing it on
     the mat, to make sure the gyro has settled before a run starts.
