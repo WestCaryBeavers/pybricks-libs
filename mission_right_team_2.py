@@ -20,42 +20,17 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 # negative means left, positive means right
 
-def mission():
-    """for station #8, #9."""  
-    reset_heading(0)
-    drive_straight(690, speed = 700)
-    turn_in_place(90)
-    drive_straight(390, speed=200)
-    turn_in_place(45)
-    drive_straight(270, speed=75)
-    run_by_degrees(robot.front_attachment, 150, speed=750)
-    drive_straight(-50, speed=200)
-    turn_in_place(90)
-    drive_straight(400, speed=400)
-    turn_in_place(45)
-    drive_straight(-250, speed=400)
-    turn_in_place(90)
-    run_by_degrees(robot.back_attachment, 130, speed=750)
-    drive_straight(-140, speed=200)
-    run_by_degrees(robot.back_attachment, -200, speed=750)
-    drive_straight(40, speed=300)
-    turn_in_place(-30)
-    run_by_degrees(robot.back_attachment, 200, speed=600)
-    drive_straight(40, speed=100)
-    turn_in_place(-10)
-    run_by_degrees(robot.back_attachment, -55, speed=50)
-    run_by_degrees(robot.front_attachment, 30, speed=100)
-    drive_straight(30, speed=200)
-    turn_in_place(-45)
-    drive_straight(750, speed=200)
-    # run_by_degrees(robot.front_attachment, 90, speed=400)
-    # turn_in_place(90)
-    # drive_straight(200)
-    # run_by_degrees(robot.front_attachment, -90, speed=400)
-    # turn_in_place(-90)
-    # drive_straight(-700)
-    # home(robot.front_attachment, speed=-200, duty_limit=30)
+def mission_2():
+    run_by_degrees(robot.front_attachment, 17, speed=100)
+    drive_straight(331, speed=300)
+    run_by_degrees(robot.front_attachment, 15, speed=100)
+    drive_straight(-170, speed=75)
+    turn_in_place(10, wait=False)
+    run_by_degrees(robot.front_attachment, -20, speed=25)
+    drive_straight(-150, speed=200)
+    
     stop_all(then=Stop.HOLD)
 
 if __name__ == "__main__":
-    mission()
+    mission_2()
+
