@@ -20,7 +20,7 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 # negative means left, positive means right
 
-def mission_1():
+def mission():
     """for station #7, #11."""  
     #seed_part
     reset_heading(0) 
@@ -61,16 +61,6 @@ def mission_1():
     turn_in_place(-45)
     drive_straight(750, speed=200)
 
-def mission_2():
-    run_by_degrees(robot.front_attachment, 17, speed=100)
-    drive_straight(331, speed=300)
-    run_by_degrees(robot.front_attachment, 15, speed=100)
-    drive_straight(-170, speed=75)
-    turn_in_place(10, wait=False)
-    run_by_degrees(robot.front_attachment, -20, speed=25)
-    drive_straight(-150, speed=200)
-    
-    stop_all(then=Stop.HOLD)
 
 if __name__ == "__main__":
-    mission_1()
+    mission()

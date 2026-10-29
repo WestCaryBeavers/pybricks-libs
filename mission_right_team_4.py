@@ -20,7 +20,7 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 # negative means left, positive means right
 
-def mission_4():
+def mission():
   #to_forest
   drive_straight(640, speed=600)
   turn_in_place(-90)
@@ -34,4 +34,4 @@ def mission_4():
 
 
 if __name__ == "__main__":
-  mission_4()
+  mission()
