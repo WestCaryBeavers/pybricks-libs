@@ -66,7 +66,23 @@ real hub, `pybricks` already exists, so the import becomes a no-op.
 | `lib_pid_controller.py` | Utility | Generic `PID` class used by line following (and available for your own control loops). |
 | `lib_math_utils.py` | Utility | `normalize_angle`, `clamp`, `sign`. |
 | `mission_example.py` | Example | A template mission + a hub-button mission selector (LEFT/RIGHT to pick, CENTER to run). |
+| `mission_right_team_1.py`..`mission_right_team_4.py` | Missions | The right-team robot's 4 real missions, one function per file. |
+| `mission_right_selector.py` | Selector | The actual program you upload to the right-team hub: a `hub_menu()` picker over all 4 missions above, so they share one hub slot instead of four. |
 | `dev_stub.py` | Dev tooling | Desktop-only stub for `pybricks`, so mission files can run under a normal `python3` for testing. No-op on the hub. |
+
+## More missions than hub slots
+
+The hub only has 5 program slots, which isn't a hard limit on how many
+missions you can run -- it's a limit on how many *separate uploads* you can
+keep at once. Don't give each mission its own slot; instead upload **one**
+program that contains every mission as a function plus a menu to pick one
+at match time: `mission_right_selector.py` imports all 4 missions from
+`mission_right_team_1.py`..`_4.py` and shows a `hub_menu()` picker, so all
+4 missions share a single hub slot instead of four.
+
+Each robot/hub only ever needs **one slot occupied**, no matter how many
+missions it runs, because the menu does the choosing after upload instead
+of before.
 
 ## Why "gyro based"?
 
