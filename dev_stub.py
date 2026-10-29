@@ -78,8 +78,15 @@ def _install():
         def time(self):
             return 0
 
+    def hub_menu(*options):
+        # Desktop stand-in: no hub matrix/buttons to pick with, so just take
+        # the first option non-interactively (good enough to sanity-check
+        # that a selector module imports and runs end-to-end).
+        return options[0]
+
     tools.wait = wait
     tools.StopWatch = StopWatch
+    tools.hub_menu = hub_menu
     sys.modules["pybricks.tools"] = tools
 
     hubs = types.ModuleType("pybricks.hubs")
