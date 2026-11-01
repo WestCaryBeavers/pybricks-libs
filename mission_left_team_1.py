@@ -26,7 +26,7 @@ def back():
 
 # back line at back
 def mission_1():
-    home(robot.back_attachment)
+    run_by_degrees(back(), 100, speed=300)
     reset_heading(0)
     drive_straight(-750,speed=190)
     drive_straight( 50, speed=100)
@@ -40,15 +40,34 @@ def mission_1():
     #drive_straight(50,speed=100)
     #run_by_degrees(front(), -50, speed=100)  # Example additional movement
     turn_in_place(-80)  # Example turn, adjust the angle as needed
-    #drive_straight(50,speed=200)
-    #turn_in_place(-40)
+    drive_straight(10,speed=200)  # Example additional movement
     turn_in_place(80)
+    drive_straight(740,speed=200)  # Example additional movement
+
+def mission_1_2():
+    run_by_degrees(front(), -50, speed=300)
+    reset_heading(0)
+    drive_straight(-750,speed=190)
+    drive_straight( 50, speed=100)
+    drive_straight(-50, speed=100)
+    run_by_degrees(back(), 120, speed=500, wait=False)
+    turn_in_place(-30)  # Example turn, adjust the angle as needed
+    drive_straight(10,speed=200)  # Example additional movement
+    turn_in_place(40)
+    drive_straight(500,speed=400)
+    turn_with_radius(100,145)  
+    run_by_degrees(front(), 200, speed=500)  # Example additional movement
+    drive_straight(75,speed=200)
+    run_by_degrees(front(), -100, speed=500, wait=False)
+    drive_straight(-50,speed=90)
+    drive_straight(-300)
+    #run_by_degrees(front(), 200, speed=500, wait=False)
 
 
 # aline on first line wheel on side line
 def mission_2():
 # mision 2
-    run_by_degrees(back(), 30, speed=300)
+    run_by_degrees(back(), -30, speed=300)
     drive_straight(-200, speed=500)
     turn_in_place(-45)
     drive_straight(-350, speed=170)  # Example movement after lowering the attachment
@@ -61,9 +80,9 @@ def mission_2():
     
 def mission_3():
 # mission 3, left side at side line
-    run_by_degrees(front(), -150, speed=300)
-    drive_straight(450, speed=300)
-    drive_straight(-450, speed=300)
+    #run_by_degrees(front(), -150, speed=300)
+    drive_straight(-400, speed=300)
+    drive_straight(400, speed=300)
     #run_by_degrees(front(), 30, speed=300)
     #run_by_degrees(front(), -100, speed=300)
     #drive_straight(370, speed=300)
@@ -126,8 +145,7 @@ def mission_4():
     mission_4_grabseed()
 
 def testing():
-   turn_in_place(80)
-   drive_straight(750, speed=200)
-
+    turn_with_radius(-50,-100)
 if __name__ == "__main__":
-    run_mission_selector()
+    #run_mission_selector()
+    mission_3()
