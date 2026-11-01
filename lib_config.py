@@ -30,8 +30,8 @@ BACK_ATTACHMENT_MOTOR_DIRECTION = Direction.CLOCKWISE
 # accepted by pybricks.pupdevices.Motor(gears=...), e.g. [12, 36] for a
 # 12-tooth driver into a 36-tooth driven gear. Leave as None for a direct
 # (1:1) connection.
-FRONT_ATTACHMENT_GEARS = [[32, 40], [12, 24]]
-BACK_ATTACHMENT_GEARS = None
+FRONT_ATTACHMENT_GEARS = [[28, 36], [12, 20]]
+BACK_ATTACHMENT_GEARS = [[28, 36], [12, 20]]
 
 # ---------------------------------------------------------------------------
 # Sensor ports

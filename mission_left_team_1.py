@@ -48,7 +48,6 @@ def mission_1():
 # aline on first line wheel on side line
 def mission_2():
 # mision 2
-<<<<<<< HEAD
     run_by_degrees(back(), 30, speed=300)
     drive_straight(-200, speed=500)
     turn_in_place(-45)
@@ -58,18 +57,6 @@ def mission_2():
     drive_straight(50, speed=80)
     drive_straight(300, speed=800)
     front().run_target(300, 30,)
-=======
-    #front().run_target(300, 30)
-    #run_by_degrees(front(), -30, speed=300)
-    drive_straight(115, speed=500)
-    turn_in_place(-45)
-    drive_straight(350, speed=200)  # Example movement after lowering the attachment
-    #run_by_degrees(front(), -90, speed=500)
-    run_by_degrees(front(), -40, speed=100, wait=True)
-    drive_straight(-50, speed=80)
-    drive_straight(-300, speed=800)
-    #front().run_target(300, 30,)
->>>>>>> 8a24165e6e5af1e1e837b8b1bcd3ec0f2d8192da
     #run_by_degrees(front(), 100, speed=300)
     
 def mission_3():
@@ -143,15 +130,4 @@ def testing():
    drive_straight(750, speed=200)
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     run_mission_selector()
-=======
-# run_mission_selector()
-    mission_4_checkseed()
-    # change arms
-    mission_4_grabseed()
-
-# if __name__ == "__main__":
-# run_mission_selector()
-mission_2()
->>>>>>> 8a24165e6e5af1e1e837b8b1bcd3ec0f2d8192da
