@@ -17,18 +17,20 @@ import dev_stub  # noqa: F401  (desktop-only pybricks stub; no-op on the hub)
 
 from pybricks.tools import hub_menu
 
-from mission_left_team_1 import mission_1, mission_2, mission_3, mission_5
+from mission_left_team_1 import mission_1, mission_2, mission_3, mission_4, mission_5, testing
 
 MISSIONS = {
+    "0": testing,
     "1": mission_1,
     "2": mission_2,
     "3": mission_3,
-    "4": mission_5
+    "4": mission_4,
+    "5": mission_5
 }
 
 
 def run_mission_selector():
-    """Show '1'-'4' on the hub matrix; Bluetooth button cycles, center
+    """Show '0'-'5' on the hub matrix; Bluetooth button cycles, center
     (the selection made by hub_menu) runs the chosen mission.
     """
     selected = hub_menu(*MISSIONS.keys())

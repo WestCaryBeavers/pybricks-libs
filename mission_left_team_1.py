@@ -20,36 +20,41 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 def front():
     return robot.front_attachment
-def mission_1_2():
-    mission_1()
-    mission_2()
+def back():
+    return robot.back_attachment
 
 # back line at back
 def mission_1():
+    home(robot.back_attachment)
+    reset_heading(0)
+    drive_straight(-750,speed=190)
+    drive_straight( 50, speed=100)
+    drive_straight(-50, speed=100)
+    run_by_degrees(front(), 120, speed=500, wait=False)
     #run_by_degrees(front(), 50, speed=100)
-    run_by_degrees(front(), -60, speed=100)
-    drive_straight(740,speed=200) 
-    drive_straight(-740,speed=700)  # Example additional movement
+    # run_by_degrees(front(), -60, speed=100)
+    # drive_straight(740,speed=200) 
+    # Example additional movement
     # not doing this part
     #drive_straight(50,speed=100)
     #run_by_degrees(front(), -50, speed=100)  # Example additional movement
-    #turn_in_place(-30)
+    turn_in_place(-80)  # Example turn, adjust the angle as needed
     #drive_straight(50,speed=200)
     #turn_in_place(-40)
+    turn_in_place(80)
 
 
-# aline on back line wheel on side line
+# aline on first line wheel on side line
 def mission_2():
 # mision 2
-    front().run_target(300, 30,)
-    #run_by_degrees(front(), -30, speed=300)
-    drive_straight(115, speed=500)
+    run_by_degrees(back(), 30, speed=300)
+    drive_straight(-200, speed=500)
     turn_in_place(-45)
-    drive_straight(410, speed=200)  # Example movement after lowering the attachment
+    drive_straight(-350, speed=170)  # Example movement after lowering the attachment
     #run_by_degrees(front(), -90, speed=500)
-    run_by_degrees(front(), -20, speed=100, wait=False)
-    drive_straight(-50, speed=80)
-    drive_straight(-300, speed=800)
+    run_by_degrees(back(), -100, speed=100, wait=False)
+    drive_straight(50, speed=80)
+    drive_straight(300, speed=800)
     front().run_target(300, 30,)
     #run_by_degrees(front(), 100, speed=300)
     
@@ -101,18 +106,28 @@ def mission_4_grabseed():
     drive_straight(-650,speed=300) 
 
 def mission_5():
-    run_by_degrees(front(), 100, speed=300)
+    print("mission 5")
+    #home(robot.front_attachment)
+    run_by_degrees(front(), 30, speed=500)
     drive_straight(180, speed=300)
     turn_in_place(-90)
     drive_straight(710, speed=275)
-    run_by_degrees(front(),-35, 45,)
-    turn_in_place(20)
-    drive_straight(-70, speed=300)
-    run_by_degrees(front(),-50, 50)
-    drive_straight(175, speed=50)
+    run_by_degrees(front(), -30, speed=500)
+    drive_straight(10, speed=275)
+    run_by_degrees(front(), -10, speed=500)
+    drive_straight(50, speed=50)
+    drive_straight(-770, speed=275)
+
+def mission_4():
+    mission_4_checkseed()
+    wait(1000)
+    # change arms
+    mission_4_grabseed()
+
+def testing():
+   turn_in_place(80)
+   drive_straight(750, speed=200)
 
 if __name__ == "__main__":
 # run_mission_selector()
-    mission_4_checkseed()
-    # change arms
-    mission_4_grabseed()
+    mission_2()
