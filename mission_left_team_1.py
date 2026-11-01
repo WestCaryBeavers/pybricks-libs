@@ -17,6 +17,7 @@ from lib_movement_turning import turn_in_place, pivot_turn, turn_with_radius
 from lib_movement_stopping import stop_all
 from lib_attachment_control import run_by_degrees, home, run_to_angle
 from lib_sensor_gyro import reset_heading, wait_until_stationary
+from mission_right_selector import run_mission_selector
 
 def front():
     return robot.front_attachment
@@ -129,5 +130,4 @@ def testing():
    drive_straight(750, speed=200)
 
 if __name__ == "__main__":
-# run_mission_selector()
-    mission_2()
+    run_mission_selector()
