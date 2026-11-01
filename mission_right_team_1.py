@@ -33,7 +33,8 @@ def mission():
     turn_in_place(90)
     drive_straight(280, speed=300)
     turn_in_place(45)
-    drive_straight(300, speed=75)
+    drive_straight(200, speed=200)
+    drive_straight(130, speed=75)
     #flip_fungus
     run_by_degrees(robot.front_attachment, 150, speed=700)
     #to_roots
@@ -55,7 +56,8 @@ def mission():
     drive_straight(45, speed=100)
     turn_in_place(-10)
     #uncover_nest
-    run_by_degrees(robot.back_attachment, -90, speed=50)
+    run_by_degrees(robot.back_attachment, -60, speed=50)
+    run_by_degrees(robot.back_attachment, 50, speed=50)
     drive_straight(30, speed=200)
     #end_mission
     turn_in_place(-45)

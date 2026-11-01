@@ -26,7 +26,8 @@ def mission():
   turn_in_place(45)
   drive_straight(200, speed=300)
   # drop_seeds
-  run_by_degrees(robot.front_attachment, -60, speed=25)
+  run_by_degrees(robot.front_attachment, -60, speed=75)
+  run_by_degrees(robot.front_attachment, 60, speed=100)
   # mad_dash
   drive_straight(-350, speed=700)
   turn_in_place(-35)
