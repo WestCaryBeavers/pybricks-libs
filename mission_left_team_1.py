@@ -99,17 +99,19 @@ def mission_3():
 
 def mission_4_checkseed():
     home(robot.front_attachment)
-    run_to_angle(robot.front_attachment, 70, speed=100)
+    # run_to_angle(robot.front_attachment, -70, speed=100)
     drive_straight(180,speed=200) 
     turn_in_place(-90)  # Example turn, adjust the angle as needed
-    drive_straight(670,speed=300)  # Example additional movement
-    turn_in_place(-35)  # Example turn, adjust the angle as needed
+    drive_straight(690,speed=300)  # Example additional movement
+    turn_in_place(-50)  # Example turn, adjust the angle as needed
     drive_straight(60,speed=100)  # Example additional movement
-    run_by_degrees(robot.front_attachment, -70, speed=30)
+    run_by_degrees(robot.front_attachment, 155, speed=30)
     wait(500)
-    run_by_degrees(robot.front_attachment, 90, speed=30)
+    run_by_degrees(robot.front_attachment, -130, speed=100)
     turn_in_place(30)
-    drive_straight(-670, speed=200)  # Example additional movement
+    drive_straight(-470, speed=200)  # Example additional movement
+    turn_in_place(90)
+    drive_straight(-350, speed=400)
 
 
 def mission_4_grabseed():
@@ -127,25 +129,39 @@ def mission_4_grabseed():
 
 def mission_5():
     print("mission 5")
-    #home(robot.front_attachment)
-    run_by_degrees(front(), 30, speed=500)
-    drive_straight(180, speed=300)
+    home(robot.front_attachment, speed=100)
+    run_to_angle(front(), -30, speed=500)
+    drive_straight(175, speed=300)
     turn_in_place(-90)
-    drive_straight(710, speed=275)
-    run_by_degrees(front(), -30, speed=500)
-    drive_straight(10, speed=275)
-    run_by_degrees(front(), -10, speed=500)
-    drive_straight(50, speed=50)
+    drive_straight(770, speed=275)
+    run_by_degrees(front(), -20, speed=500)
+    turn_in_place(15)    
+    run_by_degrees(front(), -40)
+    drive_straight(-20, speed=300)
+    run_by_degrees(front(), 30, speed=100)
+    drive_straight(-30, speed=300)
+    run_by_degrees(front(), -40, speed=50)
+    drive_straight(150, speed=100)
     drive_straight(-770, speed=275)
-
+    
 def mission_4():
     mission_4_checkseed()
     wait(1000)
     # change arms
     mission_4_grabseed()
 
-def testing():
-    turn_with_radius(-50,-100)
+# def testing():
+#     run_by_degrees(front(), 30 ,speed=300)
+#     wait(500), speed=300)
+#     turn_in_place(30)    
+#     run_by_degrees(front(), -130,
+#     drive_straight(-30, speed=300)
+#     run_by_degrees(front(), 30, speed=100)
+#     drive_straight(-40, speed=300)
+#     run_by_degrees(front(), -60, speed=50)
+#     drive_straight(100, speed=50, wait=False)
+#     run_by_degrees(front(), -30, speed=50)
+#     drive_straight(-770, speed=275)
 if __name__ == "__main__":
     #run_mission_selector()
-    mission_3()
+    mission_5()

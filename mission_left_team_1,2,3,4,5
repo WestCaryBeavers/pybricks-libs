@@ -94,9 +94,9 @@ def mission_5():
     drive_straight(710, speed=275)
     run_by_degrees(front(),-35, 45,)
     turn_in_place(20)
-    drive_straight(-70, speed=300)
-    run_by_degrees(front(),-50, 50)
-    drive_straight(175, speed=50)
+    # drive_straight(-70, speed=300)
+    # run_by_degrees(front(),-50, 50)
+    # drive_straight(175, speed=50)
 
 def testing():
     run_by_degrees(front(), -200, speed=300)
