@@ -22,19 +22,13 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 def mission():
     """for station #7, #11."""  
-    #seed_part
-    reset_heading(0) 
-    drive_straight(470, speed = 400)
-    turn_in_place(45)
-    drive_straight(130, speed=200)
-    turn_in_place(-45)
     #to_ant
-    drive_straight(150, 100)
+    drive_straight(680, 600)
     turn_in_place(90)
-    drive_straight(280, speed=300)
+    drive_straight(420, speed=300)
     turn_in_place(45)
-    drive_straight(200, speed=200)
-    drive_straight(130, speed=75)
+    drive_straight(100, speed=200)
+    drive_straight(150, speed=75)
     #flip_fungus
     run_by_degrees(robot.front_attachment, 150, speed=700)
     #to_roots
@@ -50,18 +44,18 @@ def mission():
     run_by_degrees(robot.back_attachment, -200, speed=700)
     #to_greenhouse
     drive_straight(40, speed=300)
-    turn_in_place(-30)
+    turn_in_place(-35)
     #open_compost
     run_by_degrees(robot.back_attachment, 200, speed=600)
     drive_straight(45, speed=100)
     turn_in_place(-10)
     #uncover_nest
-    run_by_degrees(robot.back_attachment, -60, speed=50)
+    run_by_degrees(robot.back_attachment, -75, speed=30)
     run_by_degrees(robot.back_attachment, 50, speed=50)
     drive_straight(30, speed=200)
     #end_mission
-    turn_in_place(-45)
-    drive_straight(750, speed=200)
+    turn_in_place(-55)
+    drive_straight(750, speed=600)
 
 
 if __name__ == "__main__":

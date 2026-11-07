@@ -21,17 +21,20 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 # negative means left, positive means right
 
 def mission():
-  # to_deposit
-  drive_straight(620, speed=500)
-  turn_in_place(45)
-  drive_straight(200, speed=300)
-  # drop_seeds
-  run_by_degrees(robot.front_attachment, -60, speed=75)
-  run_by_degrees(robot.front_attachment, 60, speed=100)
+  #to_forest
+  drive_straight(650, speed=600)
+  turn_in_place(-90)
+  #deposit
+  drive_straight(20, speed=50)
+  run_by_degrees(robot.front_attachment, -75, speed=80)
+  turn_in_place(-10)
+  run_by_degrees(robot.front_attachment, -100, speed=100)
   # mad_dash
-  drive_straight(-350, speed=700)
-  turn_in_place(-35)
-  drive_straight(-750,speed=750)
+  run_by_degrees(robot.front_attachment, 100, speed=25)
+  drive_straight(-60, speed=600)
+  turn_in_place(95)
+  drive_straight(950, speed=750)
+
 
 if __name__ == "__main__":
-    mission()
+  mission()

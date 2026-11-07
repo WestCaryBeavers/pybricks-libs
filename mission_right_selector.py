@@ -20,18 +20,16 @@ from pybricks.tools import hub_menu
 from mission_right_team_1 import mission as mission_1
 from mission_right_team_2 import mission as mission_2
 from mission_right_team_3 import mission as mission_3
-from mission_right_team_4 import mission as mission_4
 
 MISSIONS = {
     "1": mission_1,
     "2": mission_2,
     "3": mission_3,
-    "4": mission_4,
 }
 
 
 def run_mission_selector():
-    """Show '1'-'4' on the hub matrix; Bluetooth button cycles, center
+    """Show '1'-'3' on the hub matrix; Bluetooth button cycles, center
     (the selection made by hub_menu) runs the chosen mission.
     """
     selected = hub_menu(*MISSIONS.keys())
