@@ -17,7 +17,7 @@ import dev_stub  # noqa: F401  (desktop-only pybricks stub; no-op on the hub)
 
 from pybricks.tools import hub_menu
 
-from mission_left_team_1 import mission_1, mission_2, mission_3, mission_4, mission_5 as mission_1L, mission_2L, mission_3L, mission_4L, mission_5L
+from mission_left_team_1 import mission_1 as mission_1L, mission_2 as mission_2L, mission_3 as mission_3L, mission_4 as mission_4L, mission_5 as mission_5L
 
 MISSIONS = {
     "1L": mission_1L,

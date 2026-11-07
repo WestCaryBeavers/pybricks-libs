@@ -45,7 +45,8 @@ def mission_1():
     drive_straight(740,speed=200)  # Example additional movement
 
 def mission_1_2():
-    run_by_degrees(front(), -50, speed=300)
+    #run_by_degrees(front(), -50, speed=300)
+    home(front(), -200)
     reset_heading(0)
     drive_straight(-750,speed=190)
     drive_straight( 50, speed=100)
@@ -150,18 +151,28 @@ def mission_4():
     # change arms
     mission_4_grabseed()
 
-# def testing():
-#     run_by_degrees(front(), 30 ,speed=300)
-#     wait(500), speed=300)
-#     turn_in_place(30)    
-#     run_by_degrees(front(), -130,
-#     drive_straight(-30, speed=300)
-#     run_by_degrees(front(), 30, speed=100)
-#     drive_straight(-40, speed=300)
-#     run_by_degrees(front(), -60, speed=50)
-#     drive_straight(100, speed=50, wait=False)
-#     run_by_degrees(front(), -30, speed=50)
-#     drive_straight(-770, speed=275)
+def mission_3_5():
+    drive_straight(-400, speed=200)
+    drive_straight(70, speed=500)
+    turn_with_radius(-93, 180)
+    home(front(),200)
+    run_by_degrees(front(),-30,speed=500)
+    drive_straight(430, speed=500)
+    run_by_degrees(front(), -20, speed=500)
+    turn_in_place(15)    
+    run_by_degrees(front(), -40)
+    drive_straight(-20, speed=300)
+    run_by_degrees(front(), 30, speed=100)
+    drive_straight(-30, speed=300)
+    run_by_degrees(front(), -40, speed=50)
+    drive_straight(150, speed=300)
+    turn_in_place(-15)
+    drive_straight(-770, speed=500)
+    
+
+def testing():
+    turn_with_radius(-100, 180)
+    drive_straight(front(),125)
 if __name__ == "__main__":
     #run_mission_selector()
-    mission_5()
+    mission_3_5()
