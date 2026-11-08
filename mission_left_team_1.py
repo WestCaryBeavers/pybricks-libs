@@ -152,7 +152,7 @@ def mission_4():
     # change arms
     mission_4_grabseed()
 
-def mission_3_5():
+def mission_3_4_5():
     drive_straight(-400, speed=200)
     drive_straight(70, speed=500)
     turn_with_radius(-100, 180)
@@ -179,7 +179,6 @@ def mission_3_5():
     drive_straight(100)
     turn_in_place(-90)
     drive_straight(-650, speed=500)
-    #drive_straight(-770, speed=500)
 
 
 def testing():
