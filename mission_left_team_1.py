@@ -117,6 +117,5 @@ if __name__ == "__main__":
     # change arms
     mission_4_grabseed()
 
-# if __name__ == "__main__":
-# run_mission_selector()
-mission_2()
+if __name__ == "__main__":
+    mission_2()
