@@ -18,6 +18,7 @@ from lib_movement_stopping import stop_all
 from lib_attachment_control import run_by_degrees, home, run_to_angle
 from lib_sensor_gyro import reset_heading, wait_until_stationary
 from mission_right_selector import run_mission_selector
+from mission_right_team_1 import mission
 
 def front():
     return robot.front_attachment
@@ -154,7 +155,7 @@ def mission_4():
 def mission_3_5():
     drive_straight(-400, speed=200)
     drive_straight(70, speed=500)
-    turn_with_radius(-93, 180)
+    turn_with_radius(-100, 180)
     home(front(),200)
     run_by_degrees(front(),-30,speed=500)
     drive_straight(430, speed=500)
@@ -167,12 +168,25 @@ def mission_3_5():
     run_by_degrees(front(), -40, speed=50)
     drive_straight(150, speed=300)
     turn_in_place(-15)
-    drive_straight(-770, speed=500)
-    
+    run_by_degrees(front(), -40, speed=500)
+    drive_straight(-120)
+    turn_in_place(-55)
+    drive_straight(-50)
+    turn_in_place(180)
+    run_by_degrees(back(), 60)
+    drive_straight(-100)
+    run_by_degrees(back(), -60)
+    drive_straight(100)
+    turn_in_place(-90)
+    drive_straight(-650, speed=500)
+    #drive_straight(-770, speed=500)
+
 
 def testing():
-    turn_with_radius(-100, 180)
-    drive_straight(front(),125)
+    drive_straight(-120)
+    turn_in_place(-55)
+    drive_straight(-50)
+    turn_in_place(180)
 if __name__ == "__main__":
     #run_mission_selector()
     mission_3_5()
