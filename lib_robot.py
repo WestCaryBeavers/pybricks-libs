@@ -21,16 +21,39 @@ class Robot:
         self.left_motor = Motor(config.LEFT_DRIVE_MOTOR_PORT, config.LEFT_DRIVE_MOTOR_DIRECTION)
         self.right_motor = Motor(config.RIGHT_DRIVE_MOTOR_PORT, config.RIGHT_DRIVE_MOTOR_DIRECTION)
 
+        # Only 2 physical attachment motors exist (ports C/D), shared
+        # between the right team's and the left team's attachments -- a
+        # port can only ever back ONE live Motor object, so build each
+        # port's Motor exactly once, using whichever team's gear ratio
+        # config.ACTIVE_TEAM says is physically mounted right now.
+        if config.ACTIVE_TEAM == "right":
+            front_gears = config.RIGHT_TEAM_FRONT_ATTACHMENT_GEARS
+            back_gears = config.RIGHT_TEAM_BACK_ATTACHMENT_GEARS
+        elif config.ACTIVE_TEAM == "left":
+            front_gears = config.LEFT_TEAM_FRONT_ATTACHMENT_GEARS
+            back_gears = config.LEFT_TEAM_BACK_ATTACHMENT_GEARS
+        else:
+            raise ValueError(
+                "config.ACTIVE_TEAM must be 'right' or 'left', got %r" % (config.ACTIVE_TEAM,)
+            )
+
         self.front_attachment = self._make_motor(
             config.FRONT_ATTACHMENT_MOTOR_PORT,
             config.FRONT_ATTACHMENT_MOTOR_DIRECTION,
-            config.FRONT_ATTACHMENT_GEARS,
+            front_gears,
         )
         self.back_attachment = self._make_motor(
             config.BACK_ATTACHMENT_MOTOR_PORT,
             config.BACK_ATTACHMENT_MOTOR_DIRECTION,
-            config.BACK_ATTACHMENT_GEARS,
+            back_gears,
         )
+        # Aliases so mission files written against either team's naming
+        # keep working -- they all refer to the SAME two Motor objects
+        # above, not separate hardware.
+        self.right_team_front_attachment = self.front_attachment
+        self.right_team_back_attachment = self.back_attachment
+        self.left_team_front_attachment = self.front_attachment
+        self.left_team_back_attachment = self.back_attachment
 
         self.drive_base = DriveBase(
             self.left_motor,
@@ -49,10 +72,10 @@ class Robot:
         # library gyro based: no extra code is needed per-call.
         self.drive_base.use_gyro(True)
 
-        self.left_color_sensor = self._make_color_sensor(config.LEFT_COLOR_SENSOR_PORT)
-        self.right_color_sensor = self._make_color_sensor(config.RIGHT_COLOR_SENSOR_PORT)
+        # self.left_color_sensor = self._make_color_sensor(config.LEFT_COLOR_SENSOR_PORT)
+        # self.right_color_sensor = self._make_color_sensor(config.RIGHT_COLOR_SENSOR_PORT)
         # self.distance_sensor = self._make_ultrasonic_sensor(config.DISTANCE_SENSOR_PORT)
-        self.touch_sensor = self._make_touch_sensor(config.TOUCH_SENSOR_PORT)
+        # self.touch_sensor = self._make_touch_sensor(config.TOUCH_SENSOR_PORT)
 
     @staticmethod
     def _make_motor(port, direction, gears):

@@ -26,12 +26,24 @@ RIGHT_DRIVE_MOTOR_DIRECTION = Direction.CLOCKWISE
 FRONT_ATTACHMENT_MOTOR_DIRECTION = Direction.CLOCKWISE
 BACK_ATTACHMENT_MOTOR_DIRECTION = Direction.CLOCKWISE
 
+# This one hub's two attachment motors (ports C/D) are physically shared
+# between the right team's and the left team's attachments -- whichever
+# team's gear train is bolted onto the motor right now determines the
+# correct gear ratio below. Only ONE team's attachments can be mounted (and
+# therefore only one Motor object can exist per port) at any given time, so
+# set this to match the hardware before running either team's missions.
+ACTIVE_TEAM = "right"  # "right" or "left"
+
 # Optional gear trains between an attachment motor and its output shaft, as
 # accepted by pybricks.pupdevices.Motor(gears=...), e.g. [12, 36] for a
 # 12-tooth driver into a 36-tooth driven gear. Leave as None for a direct
 # (1:1) connection.
-FRONT_ATTACHMENT_GEARS = [[32, 40], [12, 24]]
-BACK_ATTACHMENT_GEARS = [[32, 40], [12, 24]]
+# - used when ACTIVE_TEAM == "right"
+RIGHT_TEAM_FRONT_ATTACHMENT_GEARS = [[32, 40], [12, 24]]
+RIGHT_TEAM_BACK_ATTACHMENT_GEARS = [[32, 40], [12, 24]]
+# - used when ACTIVE_TEAM == "left"
+LEFT_TEAM_FRONT_ATTACHMENT_GEARS = [[28, 36], [12, 20]]
+LEFT_TEAM_BACK_ATTACHMENT_GEARS = [[28, 36], [12, 20]]
 
 # ---------------------------------------------------------------------------
 # Sensor ports

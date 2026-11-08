@@ -26,11 +26,11 @@ def mission():
   turn_in_place(-90)
   #deposit
   drive_straight(20, speed=50)
-  run_by_degrees(robot.front_attachment, -75, speed=80)
+  run_by_degrees(robot.right_team_front_attachment, -75, speed=80)
   turn_in_place(-10)
-  run_by_degrees(robot.front_attachment, -100, speed=100)
+  run_by_degrees(robot.right_team_front_attachment, -100, speed=100)
   # mad_dash
-  run_by_degrees(robot.front_attachment, 100, speed=25)
+  run_by_degrees(robot.right_team_front_attachment, 100, speed=25)
   drive_straight(-60, speed=600)
   turn_in_place(95)
   drive_straight(950, speed=750)

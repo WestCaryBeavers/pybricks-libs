@@ -20,12 +20,12 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 # negative means left, positive means right
 
 def mission():
-    run_by_degrees(robot.front_attachment, 17, speed=100)
+    run_by_degrees(robot.right_team_front_attachment, 17, speed=100)
     drive_straight(331, speed=300)
-    run_by_degrees(robot.front_attachment, 15, speed=100)
+    run_by_degrees(robot.right_team_front_attachment, 15, speed=100)
     drive_straight(-170, speed=75)
     turn_in_place(10, wait=False)
-    run_by_degrees(robot.front_attachment, -20, speed=25)
+    run_by_degrees(robot.right_team_front_attachment, -20, speed=25)
     drive_straight(-150, speed=200)
     
     stop_all(then=Stop.HOLD)

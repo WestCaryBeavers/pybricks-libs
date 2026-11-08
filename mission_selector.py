@@ -36,8 +36,8 @@ def run_mission_selector():
     """Show '1'-'6' on the hub matrix; Bluetooth button cycles, center
     (the selection made by hub_menu) runs the chosen mission.
     """
-    selected = hub_menu(*MISSIONS.keys())
-    MISSIONS[selected]()
+    # selected = hub_menu(*MISSIONS.keys())
+    # MISSIONS[selected]()
 
 
 if __name__ == "__main__":

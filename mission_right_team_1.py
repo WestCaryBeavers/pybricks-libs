@@ -30,7 +30,7 @@ def mission():
     drive_straight(100, speed=200)
     drive_straight(150, speed=75)
     #flip_fungus
-    run_by_degrees(robot.front_attachment, 150, speed=700)
+    run_by_degrees(robot.right_team_front_attachment, 150, speed=700)
     #to_roots
     drive_straight(-50, speed=200)
     turn_in_place(90)

@@ -38,6 +38,9 @@ def stop_all(then=Stop.COAST):
     gentlest option on gears and mechanisms.
     """
     robot.drive_base.stop()
+    # front_attachment/back_attachment are the only 2 physical attachment
+    # motors -- right_team_*/left_team_* are aliases to these same two
+    # objects (see lib_robot.py), so stop each motor only once here.
     for motor in (robot.left_motor, robot.right_motor, robot.front_attachment, robot.back_attachment):
         if motor is None:
             continue
