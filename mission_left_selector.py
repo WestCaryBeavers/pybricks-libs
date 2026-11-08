@@ -31,10 +31,14 @@ MISSIONS = {
 
 def run_mission_selector():
     """Show '0'-'5' on the hub matrix; Bluetooth button cycles, center
-    (the selection made by hub_menu) runs the chosen mission.
+    (the selection made by hub_menu) runs the chosen mission. Loops back
+    to the menu after each mission finishes instead of letting the program
+    end, so the hub shows this menu again rather than falling back to its
+    own pre-launch program-picker screen.
     """
-    selected = hub_menu(*MISSIONS.keys())
-    MISSIONS[selected]()
+    while True:
+        selected = hub_menu(*MISSIONS.keys())
+        MISSIONS[selected]()
 
 
 if __name__ == "__main__":

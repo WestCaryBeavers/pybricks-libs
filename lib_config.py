@@ -45,6 +45,27 @@ RIGHT_TEAM_BACK_ATTACHMENT_GEARS = [[32, 40], [12, 24]]
 LEFT_TEAM_FRONT_ATTACHMENT_GEARS = [[28, 36], [12, 20]]
 LEFT_TEAM_BACK_ATTACHMENT_GEARS = [[28, 36], [12, 20]]
 
+
+def require_active_team(team):
+    """Guard for the top of every mission function: raise unless ACTIVE_TEAM
+    matches `team`, instead of silently driving the attachment motors with
+    the wrong gear ratio (the other team's) baked in.
+
+    Needed because both mission_selector.py and mission_all_selector.py
+    import every mission from both teams into one program -- without this
+    check, picking a right-team mission while ACTIVE_TEAM == "left" (or
+    vice versa) would run fine in code but move the attachment the wrong
+    amount on the actual hub, since the Motor object was built with the
+    other team's gears (see lib_robot.py).
+    """
+    if team != ACTIVE_TEAM:
+        raise RuntimeError(
+            "This is a %s-team mission, but lib_config.ACTIVE_TEAM is %r. "
+            "Set ACTIVE_TEAM = %r in lib_config.py to match whichever "
+            "team's attachment gear train is physically mounted on this hub "
+            "right now, then re-run." % (team, ACTIVE_TEAM, team)
+        )
+
 # ---------------------------------------------------------------------------
 # Sensor ports
 # ---------------------------------------------------------------------------
