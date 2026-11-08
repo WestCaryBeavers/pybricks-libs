@@ -10,8 +10,8 @@ import dev_stub  # noqa: F401  (desktop-only pybricks stub; no-op on the hub)
 from pybricks.parameters import Stop, Color, Button
 from pybricks.tools import wait
 
-import lib_config as config
 from lib_robot import robot
+from lib_robot_right import activate
 from lib_movement_straight import drive_straight
 from lib_movement_turning import turn_in_place, pivot_turn, turn_with_radius
 from lib_movement_stopping import stop_all
@@ -21,7 +21,7 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 # negative means left, positive means right
 
 def mission():
-    config.require_active_team("right")
+    activate()
     run_by_degrees(robot.right_team_front_attachment, 17, speed=100)
     drive_straight(310, speed=300)
     run_by_degrees(robot.right_team_front_attachment, 15, speed=100)

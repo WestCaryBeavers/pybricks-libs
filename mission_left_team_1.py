@@ -11,8 +11,8 @@ import dev_stub  # noqa: F401  (desktop-only pybricks stub; no-op on the hub)
 from pybricks.parameters import Stop, Color, Button
 from pybricks.tools import wait
 
-import lib_config as config
 from lib_robot import robot
+from lib_robot_left import activate
 from lib_movement_straight import drive_straight
 from lib_movement_turning import turn_in_place, pivot_turn, turn_with_radius
 from lib_movement_stopping import stop_all
@@ -26,7 +26,7 @@ def back():
 
 # back line at back
 def mission_1():
-    config.require_active_team("left")
+    activate()
     run_by_degrees(back(), 100, speed=300)
     reset_heading(0)
     drive_straight(-750,speed=190)
@@ -46,7 +46,7 @@ def mission_1():
     drive_straight(740,speed=200)  # Example additional movement
 
 def mission_1_2():
-    config.require_active_team("left")
+    activate()
     #run_by_degrees(front(), -50, speed=300)
     home(front(), -200)
     reset_heading(0)
@@ -69,8 +69,8 @@ def mission_1_2():
 
 # aline on first line wheel on side line
 def mission_2():
+    activate()
 # mision 2
-    config.require_active_team("left")
     run_by_degrees(back(), -30, speed=300)
     drive_straight(-200, speed=500)
     turn_in_place(-45)
@@ -83,8 +83,8 @@ def mission_2():
     #run_by_degrees(front(), 100, speed=300)
     
 def mission_3():
+    activate()
 # mission 3, left side at side line
-    config.require_active_team("left")
     #run_by_degrees(front(), -150, speed=300)
     drive_straight(-400, speed=300)
     drive_straight(400, speed=300)
@@ -103,7 +103,7 @@ def mission_3():
 
 
 def mission_4_checkseed():
-    config.require_active_team("left")
+    activate()
     home(front())
     # run_to_angle(robot.left_team_front_attachment, -70, speed=100)
     drive_straight(180,speed=200) 
@@ -121,7 +121,7 @@ def mission_4_checkseed():
 
 
 def mission_4_grabseed():
-    config.require_active_team("left")
+    activate()
     home(front())
     run_to_angle(front(), 10, speed=100)
     drive_straight(280,speed=200) 
@@ -135,7 +135,7 @@ def mission_4_grabseed():
     drive_straight(-650,speed=300) 
 
 def mission_5():
-    config.require_active_team("left")
+    activate()
     print("mission 5")
     home(front(), speed=100)
     run_to_angle(front(), -30, speed=500)
@@ -153,14 +153,14 @@ def mission_5():
     drive_straight(-770, speed=275)
     
 def mission_4():
-    config.require_active_team("left")
+    activate()
     mission_4_checkseed()
     wait(1000)
     # change arms
     mission_4_grabseed()
 
 def mission_3_5():
-    config.require_active_team("left")
+    activate()
     drive_straight(-400, speed=200)
     drive_straight(70, speed=500)
     turn_with_radius(-93, 180)
@@ -180,7 +180,7 @@ def mission_3_5():
     
 
 def testing():
-    config.require_active_team("left")
+    activate()
     turn_with_radius(-100, 180)
     drive_straight(front(),125)
 

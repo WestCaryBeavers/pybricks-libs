@@ -1,58 +1,87 @@
-"""Single-slot mission selector for the right-team robot.
+"""Single-slot mission selector for the shared hub -- right team's and
+left team's missions, in one menu, one program, one hub slot.
 
-This robot's codebase defines 4 missions, one `mission()` function per
-`mission_right_team_1.py`..`mission_right_team_4.py` file. Rather than
-uploading each as its own program (and burning a separate hub slot per
-mission, with only 5 slots total on the hub), this file is the ONE program
-you upload: it shows a menu on the hub matrix, you pick a mission with the
-Bluetooth button, and it runs.
+  1,2,3 = mission_right_team_1/2/3.mission   (right robot)
+  4,5,6,7 = mission_left_team_1.mission_1/2/3/4  (left robot)
 
-Upload only this file as your main program (plus every `lib_*.py` file and
-the `mission_right_team_*.py` files it imports from, as extra files in the
-same Pybricks Code project) -- that's a single hub slot covering all 4
-missions.
+(mission_right_team_skip.mission, mission_left_team_1.mission_5, and
+mission_left_team_1.testing exist but aren't wired into this menu --
+ask if you want any of them added as additional keys.)
+
+The hub only has 2 attachment motor ports (C/D), shared between the two
+teams' attachments -- see lib_robot_right.py / lib_robot_left.py. Picking
+a mission from either range calls that team's activate() first, which
+(re)builds robot.front_attachment/back_attachment with the right gear
+ratio for that team, tearing down whichever team's motors were built
+there before. activate() only updates the SOFTWARE's gear-ratio math --
+it can't swap the physical attachment hardware, so mount the matching
+team's attachment on the hub before picking a mission for it.
+
+Shows a menu on the hub matrix; you pick a mission with the Bluetooth
+button and it runs. Upload only this file as your main program, plus
+every `lib_*.py` file and `mission_right_team_*.py`/`mission_left_team_1.py`
+as extra files, in the same Pybricks Code project.
 """
 
 import dev_stub  # noqa: F401  (desktop-only pybricks stub; no-op on the hub)
 
 from pybricks.tools import hub_menu
 
-import lib_config as config
-from mission_right_team_1 import mission as mission_1
-from mission_right_team_2 import mission as mission_2
-from mission_right_team_3 import mission as mission_3
-from mission_left_team_1 import mission_1 as mission_4, mission_2 as mission_5, mission_3 as mission_6
+from lib_movement_stopping import stop_all
+from mission_right_team_1 import mission as mission_1R
+from mission_right_team_2 import mission as mission_2R
+from mission_right_team_3 import mission as mission_3R
+from mission_left_team_1 import (
+    mission_1 as mission_1L,
+    mission_2 as mission_2L,
+    mission_3 as mission_3L,
+    mission_4 as mission_4L,
+)
 
-_RIGHT_TEAM_MISSIONS = {
-    "1": mission_1,
-    "2": mission_2,
-    "3": mission_3,
-}
-_LEFT_TEAM_MISSIONS = {
-    "4": mission_4,
-    "5": mission_5,
-    "6": mission_6,
+# hub_menu() only accepts single-character options (it shows one character
+# at a time on the hub's 5x5 matrix) -- two-character keys raise
+# ValueError: Invalid argument on the real hub.
+MISSIONS = {
+    "1": mission_1R,
+    "2": mission_2R,
+    "3": mission_3R,
+    "4": mission_1L,
+    "5": mission_2L,
+    "6": mission_3L,
+    "7": mission_4L,
 }
 
-# Only one team's attachment gear train can be physically mounted (and
-# therefore only one team's missions can run correctly) at a time -- see
-# lib_config.ACTIVE_TEAM and lib_robot.py. Only ever show the active
-# team's missions, so a mismatched mission can't be selected from this
-# menu in the first place.
-MISSIONS = _RIGHT_TEAM_MISSIONS if config.ACTIVE_TEAM == "right" else _LEFT_TEAM_MISSIONS
+# The order hub_menu() cycles through on the hub matrix. MicroPython (the
+# hub's runtime) doesn't guarantee dict keys iterate back out in the order
+# they were written -- unlike desktop CPython -- so MISSIONS.keys() can
+# come out scrambled (e.g. "1","7","3","2",...) even though the dict
+# literal above is written in order. Spell the display order out
+# explicitly instead of relying on dict iteration order.
+MISSION_KEYS = ("1", "2", "3", "4", "5", "6", "7")
+
+assert set(MISSION_KEYS) == set(MISSIONS.keys()), (
+    "MISSION_KEYS and MISSIONS have drifted apart -- update both together"
+)
 
 
 def run_mission_selector():
-    """Show the active team's mission keys on the hub matrix (1-3 = right
-    team, 4-6 = left team -- whichever set matches lib_config.ACTIVE_TEAM);
-    Bluetooth button cycles, center (the selection made by hub_menu) runs
-    the chosen mission. Loops back to the menu after each mission finishes
-    instead of letting the program end, so the hub shows this menu again
-    rather than falling back to its own pre-launch program-picker screen.
+    """Show '1'-'7' on the hub matrix (1-3 = right team, 4-7 = left
+    team); Bluetooth button cycles, center (the selection made by
+    hub_menu) runs the chosen mission. Loops back to the menu after each
+    mission finishes instead of letting the program end, so the hub shows
+    this menu again rather than falling back to its own pre-launch
+    program-picker screen.
     """
     while True:
-        selected = hub_menu(*MISSIONS.keys())
+        selected = hub_menu(*MISSION_KEYS)
         MISSIONS[selected]()
+        # Release to coast right away: a mission can leave the drivebase
+        # actively HOLDing its last heading (e.g. drive_straight()'s
+        # default), and with gyro correction on, an active hold fights any
+        # tilt/rotation the gyro senses -- including being picked up by
+        # hand between missions, which otherwise spins the wheels. Coast
+        # regardless of what the mission itself left running.
+        stop_all()
 
 
 if __name__ == "__main__":

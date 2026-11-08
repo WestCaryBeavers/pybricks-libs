@@ -1,9 +1,16 @@
-"""Single point of hardware initialization.
+"""Single point of hardware initialization for the shared chassis.
 
-Every other module imports the `robot` object from here to get
-already-configured hub, motors, drivebase, and sensor objects, instead of
+Every other module imports the `robot` object from here to get an
+already-configured hub, drive motors, and drivebase, instead of
 constructing its own. Construct hardware exactly once by importing this
 module; Python's module cache guarantees `Robot()` only runs on first import.
+
+The 2 attachment motors (ports C/D) are NOT built here: only one team's
+gear train can be physically mounted on them at a time, so
+`robot.front_attachment`/`robot.back_attachment` start unset -- call
+`lib_robot_right.activate()` or `lib_robot_left.activate()` (whichever
+team's mission is about to run) to build/rebuild them with that team's
+gear ratio before using them.
 """
 
 from pybricks.hubs import PrimeHub
@@ -14,46 +21,32 @@ from pybricks.robotics import DriveBase
 import lib_config as config
 
 
+def make_motor(port, direction, gears=None):
+    """Shared helper for building any Motor (drive or attachment) from a
+    port/direction/gears triple, or None if the port isn't wired up.
+    Used here for the drive motors and by lib_robot_right.py/
+    lib_robot_left.py for the attachment motors.
+    """
+    return Motor(port, direction, gears=gears) if port is not None else None
+
+
 class Robot:
     def __init__(self):
         self.hub = PrimeHub(top_side=Axis.Z, front_side=Axis.X)
 
-        self.left_motor = Motor(config.LEFT_DRIVE_MOTOR_PORT, config.LEFT_DRIVE_MOTOR_DIRECTION)
-        self.right_motor = Motor(config.RIGHT_DRIVE_MOTOR_PORT, config.RIGHT_DRIVE_MOTOR_DIRECTION)
+        self.left_motor = make_motor(config.LEFT_DRIVE_MOTOR_PORT, config.LEFT_DRIVE_MOTOR_DIRECTION)
+        self.right_motor = make_motor(config.RIGHT_DRIVE_MOTOR_PORT, config.RIGHT_DRIVE_MOTOR_DIRECTION)
 
-        # Only 2 physical attachment motors exist (ports C/D), shared
-        # between the right team's and the left team's attachments -- a
-        # port can only ever back ONE live Motor object, so build each
-        # port's Motor exactly once, using whichever team's gear ratio
-        # config.ACTIVE_TEAM says is physically mounted right now.
-        if config.ACTIVE_TEAM == "right":
-            front_gears = config.RIGHT_TEAM_FRONT_ATTACHMENT_GEARS
-            back_gears = config.RIGHT_TEAM_BACK_ATTACHMENT_GEARS
-        elif config.ACTIVE_TEAM == "left":
-            front_gears = config.LEFT_TEAM_FRONT_ATTACHMENT_GEARS
-            back_gears = config.LEFT_TEAM_BACK_ATTACHMENT_GEARS
-        else:
-            raise ValueError(
-                "config.ACTIVE_TEAM must be 'right' or 'left', got %r" % (config.ACTIVE_TEAM,)
-            )
-
-        self.front_attachment = self._make_motor(
-            config.FRONT_ATTACHMENT_MOTOR_PORT,
-            config.FRONT_ATTACHMENT_MOTOR_DIRECTION,
-            front_gears,
-        )
-        self.back_attachment = self._make_motor(
-            config.BACK_ATTACHMENT_MOTOR_PORT,
-            config.BACK_ATTACHMENT_MOTOR_DIRECTION,
-            back_gears,
-        )
-        # Aliases so mission files written against either team's naming
-        # keep working -- they all refer to the SAME two Motor objects
-        # above, not separate hardware.
-        self.right_team_front_attachment = self.front_attachment
-        self.right_team_back_attachment = self.back_attachment
-        self.left_team_front_attachment = self.front_attachment
-        self.left_team_back_attachment = self.back_attachment
+        # Built on demand by lib_robot_right.activate() / lib_robot_left.
+        # activate() -- whichever team's mission runs first calls its own
+        # module's activate() before touching these.
+        self.front_attachment = None
+        self.back_attachment = None
+        self.right_team_front_attachment = None
+        self.right_team_back_attachment = None
+        self.left_team_front_attachment = None
+        self.left_team_back_attachment = None
+        self.active_attachment_team = None
 
         self.drive_base = DriveBase(
             self.left_motor,
@@ -76,10 +69,6 @@ class Robot:
         # self.right_color_sensor = self._make_color_sensor(config.RIGHT_COLOR_SENSOR_PORT)
         # self.distance_sensor = self._make_ultrasonic_sensor(config.DISTANCE_SENSOR_PORT)
         # self.touch_sensor = self._make_touch_sensor(config.TOUCH_SENSOR_PORT)
-
-    @staticmethod
-    def _make_motor(port, direction, gears):
-        return Motor(port, direction, gears=gears) if port is not None else None
 
     @staticmethod
     def _make_color_sensor(port):

@@ -130,6 +130,9 @@ def _install():
         def brake(self, *args, **kwargs):
             return None
 
+        def stop(self, *args, **kwargs):
+            return None
+
         def stalled(self):
             return False
 
