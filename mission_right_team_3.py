@@ -24,18 +24,20 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 def mission():
   activate()
   #to_forest
-  drive_straight(635, speed=600)
+  drive_straight(640, speed=600)
   turn_in_place(-90)
   #deposit
-  drive_straight(40, speed=50)
+  drive_straight(100, speed=50)
   run_by_degrees(robot.right_team_front_attachment, -75, speed=80)
-  turn_in_place(-10)
-  run_by_degrees(robot.right_team_front_attachment, -100, speed=100)
+  run_by_degrees(robot.right_team_front_attachment, -50, speed=100)
   # mad_dash
-  run_by_degrees(robot.right_team_front_attachment, 100, speed=25)
+  run_by_degrees(robot.right_team_front_attachment, 100, speed=500)
   drive_straight(-80, speed=600)
-  turn_in_place(95)
-  drive_straight(1050, speed=750)
+  turn_in_place(90)
+  drive_straight(700, speed=750, then=Stop.NONE)
+  turn_with_radius(radius_mm=-300, angle_deg=90)
+
+  stop_all(then=Stop.HOLD)
 
 
 if __name__ == "__main__":
