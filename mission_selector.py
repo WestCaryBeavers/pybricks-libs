@@ -34,8 +34,6 @@ from mission_right_team_3 import mission as mission_3R
 from mission_left_team_1 import (
     mission_1 as mission_1L,
     mission_2 as mission_2L,
-    mission_3 as mission_3L,
-    mission_4 as mission_4L,
 )
 
 # hub_menu() only accepts single-character options (it shows one character
@@ -47,8 +45,6 @@ MISSIONS = {
     "3": mission_3R,
     "4": mission_1L,
     "5": mission_2L,
-    "6": mission_3L,
-    "7": mission_4L,
 }
 
 # The order hub_menu() cycles through on the hub matrix. MicroPython (the
@@ -57,7 +53,7 @@ MISSIONS = {
 # come out scrambled (e.g. "1","7","3","2",...) even though the dict
 # literal above is written in order. Spell the display order out
 # explicitly instead of relying on dict iteration order.
-MISSION_KEYS = ("1", "2", "3", "4", "5", "6", "7")
+MISSION_KEYS = ("1", "2", "3", "4", "5")
 
 assert set(MISSION_KEYS) == set(MISSIONS.keys()), (
     "MISSION_KEYS and MISSIONS have drifted apart -- update both together"
