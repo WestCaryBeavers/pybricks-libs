@@ -133,6 +133,9 @@ def _install():
         def stop(self, *args, **kwargs):
             return None
 
+        def close(self, *args, **kwargs):
+            return None
+
         def stalled(self):
             return False
 
