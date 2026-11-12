@@ -22,13 +22,39 @@ from lib_sensor_gyro import reset_heading, wait_until_stationary
 
 def mission():
     activate()
-    run_by_degrees(robot.right_team_front_attachment, 17, speed=100)
-    drive_straight(310, speed=300)
+    # lower the arm to the floor
+    # run_by_degrees(robot.right_team_front_attachment, -100, speed=400)
+    home(robot.right_team_front_attachment, speed=-200)
+    # raise to the ring level
+    run_by_degrees(robot.right_team_front_attachment, 35, speed=100)
+    # drive to the ring and insert
+    drive_straight(90, speed=300)
+    # lift up the ring
     run_by_degrees(robot.right_team_front_attachment, 15, speed=100)
-    drive_straight(-170, speed=75)
+    # back off to bring to the post
+    drive_straight(-160, speed=75)
+    # release and back off
     turn_in_place(10, wait=False)
     run_by_degrees(robot.right_team_front_attachment, -20, speed=25)
+    # from from the ring
+    drive_straight(-30, speed=200)
+
+    # turn to the deposit box
+    run_by_degrees(robot.right_team_front_attachment, 90, speed=400)
+    turn_with_radius(radius_mm=-150, angle_deg=100)
+    drive_straight(420, speed=600)
+    turn_in_place(90)
+    #deposit
     drive_straight(-150, speed=200)
+    run_by_degrees(robot.right_team_back_attachment, -75, speed=80)
+    run_by_degrees(robot.right_team_back_attachment, -50, speed=100)
+    # mad_dash
+    run_by_degrees(robot.right_team_back_attachment, 100, speed=500)
+    drive_straight(80, speed=600)
+    turn_in_place(90)
+    drive_straight(-700, speed=750, then=Stop.NONE)
+    turn_with_radius(radius_mm=300, angle_deg=-90)
+
     
     stop_all(then=Stop.HOLD)
 
