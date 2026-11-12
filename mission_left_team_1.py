@@ -63,22 +63,21 @@ def mission_2():
     drive_straight(-300, speed=500)
     drive_straight(-180, speed=170)
     drive_straight(150, speed=500)
-    turn_with_radius(-90, 180)
-    # to the vine
-    home(front(), 200)
-    run_by_degrees(front(),-30,speed=500)
-    drive_straight(500, speed=500)
-    run_by_degrees(front(), -20, speed=500)
+    turn_with_radius(-80, 180)
+    # lower the arm all the way down
+    home(front(), speed=200)
+    # drive to the vine
+    drive_straight(490, speed=500)
+    # raise to the vine level and insert the bar into the hole
+    run_by_degrees(front(), -40, speed=200)
     turn_in_place(15)    
+    # start untangle step by step
     run_by_degrees(front(), -40)
     drive_straight(-20, speed=300)
-    run_by_degrees(front(), 30, speed=100)
-    drive_straight(-30, speed=300)
-    run_by_degrees(front(), -40, speed=50)
-    drive_straight(150, speed=300)
+    drive_straight(140, speed=300)
     turn_in_place(-15)
     drive_straight(-770, speed=1000)
 
 if __name__ == "__main__":
     #run_mission_selector()
-    mission_1()
+    mission_2()

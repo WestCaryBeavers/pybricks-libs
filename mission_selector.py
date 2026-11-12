@@ -11,11 +11,12 @@ ask if you want any of them added as additional keys.)
 The hub only has 2 attachment motor ports (C/D), shared between the two
 teams' attachments -- see lib_robot_right.py / lib_robot_left.py. Picking
 a mission from either range calls that team's activate() first, which
-(re)builds robot.front_attachment/back_attachment with the right gear
-ratio for that team, tearing down whichever team's motors were built
-there before. activate() only updates the SOFTWARE's gear-ratio math --
-it can't swap the physical attachment hardware, so mount the matching
-team's attachment on the hub before picking a mission for it.
+explicitly .close()s whichever team's motors are currently built there
+(Pybricks' documented way to free a port for a new Motor) and rebuilds
+with this team's gear ratio. activate() only updates the SOFTWARE's
+gear-ratio math -- it can't swap the physical attachment hardware, so
+mount the matching team's attachment on the hub before picking a mission
+for it.
 
 Shows a menu on the hub matrix; you pick a mission with the Bluetooth
 button and it runs. Upload only this file as your main program, plus
